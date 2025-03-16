@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BLSD GROUP INC</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <!-- Font Awesome for social icons -->
+    <link rel="icon" type="image/png" href="favicon.png" />
+    <!-- Placeholder for favicon -->
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&family=Dela+Gothic+One&family=Dosis:wght@200..800&family=Hubot+Sans:ital,wght@0,200..900;1,200..900&family=Luckiest+Guy&family=Rowdies:wght@300;400;700&family=Tangerine:wght@400;700&display=swap");
+    </style>
+  </head>
+  <body>
+    <!-- Preloader -->
+    <div id="preloader">
+      <div class="loader">Building Your Future...</div>
+    </div>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+      <div class="logo">BLSD</div>
+      <ul class="nav-links">
+        <li><a href="#calculator">Mortgage Wizard</a></li>
+        <li><a href="#bio">About</a></li>
+        <li><a href="#gallery">Masterpieces</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <div class="hamburger" aria-label="Toggle Navigation Menu">☰</div>
+      <!-- Theme Toggle Button -->
+    </nav>
+
+    <!-- Header -->
+    <header>
+      <div class="parallax-bg"></div>
+      <div class="header-content">
+        <h1>BLSD GROUP INC</h1>
+        <p>YOUR NEEDS ARE PRIORITY</p>
+        <a href="#calculator" class="cta-button">Get Started</a>
+        <canvas id="particles"></canvas>
+      </div>
+    </header>
+
+    <!-- Calculator Section -->
+    <section class="calculator" id="calculator">
+      <h2>Mortgage Wizard</h2>
+      <div class="section-divider"></div>
+      <div class="calc-container">
+        <form id="mortgageForm">
+          <label for="loanAmount">Loan Amount (CAD)</label>
+          <input type="number" id="loanAmount" placeholder="200000" required />
+          <label for="interestRate">Interest Rate (%)</label>
+          <input
+            type="number"
+            id="interestRate"
+            step="0.1"
+            placeholder="5"
+            required
+          />
+          <label for="loanTerm">Loan Term (Years)</label>
+          <input type="number" id="loanTerm" placeholder="25" required />
+          <button type="submit">Cast the Spell</button>
+        </form>
+        <div id="result" class="result-card">
+          Monthly Payment: <span>CAD $0</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Bio Section -->
+    <section class="bio" id="bio">
+      <h2>ABOUT ME</h2>
+      <div class="section-divider"></div>
+      <div class="bio-content">
+        <img
+          src="images/bless.jpg"
+          alt="Profile"
+          class="bio-img"
+          loading="lazy"
+        />
+        <p>
+          Hi, I'm Blessing Olawuyi — a realtor, videographer, and entrepreneur
+          with a passion for helping people reach their goals. With over a
+          decade of experience in civil engineering and construction, I bring a
+          sharp eye for detail to every real estate transaction, helping clients
+          make informed decisions. As a Calgary-based realtor specializing in
+          new constructions, presales, and real estate investments, I guide
+          families and investors to properties that match their needs and goals.
+          My mission is to ensure a smooth process with transparency, knowledge,
+          and care. I also own a media company that tells unique stories through
+          video. From promoting businesses to showcasing properties, I use my
+          videography skills to highlight your brand. Additionally, I empower
+          others by teaching them how to create their own engaging content.
+        </p>
+      </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery" id="gallery">
+      <h2>Masterpieces</h2>
+      <div class="section-divider"></div>
+      <div class="carousel">
+        <div class="carousel-item">
+          <img src="images/IMG_8208.jpg" alt="Work 1" loading="lazy" />
+        </div>
+        <div class="carousel-item">
+          <img src="images/IMG_8209.jpg" alt="Work 2" loading="lazy" />
+        </div>
+        <div class="carousel-item">
+          <img src="images/IMG_8210.jpg" alt="Work 3" loading="lazy" />
+        </div>
+        <div class="carousel-item">
+          <img src="images/IMG_8211.jpg" alt="Work 4" loading="lazy" />
+        </div>
+        <div class="carousel-item">
+          <img src="images/IMG_8212.jpg" alt="Work 5" loading="lazy" />
+        </div>
+        <div class="carousel-item">
+          <img src="images/IMG_8213.jpg" alt="Work 6" loading="lazy" />
+        </div>
+        <div class="carousel-item">
+          <img src="images/IMG_8214 (1).jpg" alt="Work 7" loading="lazy" />
+        </div>
+        <div class="carousel-item">
+          <img src="images/IMG_8215.jpg" alt="Work 8" loading="lazy" />
+        </div>
+      </div>
+    </section>
+
+    <!-- Happy Clients Section -->
+    <section class="testimonials">
+      <h2>Happy Clients</h2>
+      <div class="section-divider"></div>
+      <div class="testimonial-container">
+        <div class="testimonial">
+          <span class="quote">“</span>
+          <p>
+            Boost your product and service's credibility by adding testimonials
+            from your clients. People love recommendations, so feedback from
+            others who've tried it is invaluable.
+          </p>
+          <p class="author">— Natalia Lowe</p>
+        </div>
+        <div class="testimonial">
+          <span class="quote">“</span>
+          <p>
+            Boost your product and service's credibility by adding testimonials
+            from your clients. People love recommendations so feedback from
+            others who've tried it is invaluable.
+          </p>
+          <p class="author">— Elliot Sterling</p>
+        </div>
+        <div class="testimonial">
+          <span class="quote">“</span>
+          <p>
+            Boost your product and service's credibility by adding testimonials
+            from your clients.
+          </p>
+          <p class="author">— Lillian Pratt</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+      <h2>Contact Us</h2>
+      <div class="section-divider"></div>
+      <div class="contact-form">
+        <form id="contactForm">
+          <div class="form-group">
+            <input
+              type="text"
+              id="name"
+              name="name"
+              placeholder="Your Name"
+              required
+            />
+            <label for="name">Name</label>
+          </div>
+          <div class="form-group">
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="Your Email"
+              required
+            />
+            <label for="email">Email</label>
+          </div>
+          <div class="form-group">
+            <textarea
+              id="message"
+              name="message"
+              placeholder="Your Message"
+              required
+            ></textarea>
+            <label for="message">Message</label>
+          </div>
+          <button type="submit" class="submit-btn">Send Message</button>
+        </form>
+        <div id="formResponse" class="form-response"></div>
+      </div>
+    </section>
+
+    <!-- Modal for Image Preview -->
+    <div id="imageModal" class="modal">
+      <span class="close">×</span>
+      <img class="modal-content" id="modalImage" />
+      <div id="caption"></div>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button id="backToTop" title="Back to Top" aria-label="Scroll to Top">
+      ↑
+    </button>
+
+    <!-- CTA Overlay -->
+    <div id="ctaOverlay" class="cta-overlay">
+      <p>
+        Ready to Build Your Dream Project?
+        <a href="#contact">Contact Us Now!</a>
+      </p>
+    </div>
+
+    <footer>
+      <p>© 2025 BLSD GROUP INC. Crafted with Passion.</p>
+      <div class="footer-info">
+        <p>Address: 1816 Crowchild Trail NW, #700, Calgary AB, T2M3Y7</p>
+        <p>Phone: <a href="tel:+17808385470">780-838-5470</a></p>
+        <div class="social-links">
+          <a
+            href="https://www.facebook.com/shakey.olawuyi/"
+            target="_blank"
+            class="social-icon"
+          >
+            <i class="fab fa-facebook-f"></i>
+          </a>
+          <a
+            href="https://www.instagram.com/bless.olawuyi/"
+            target="_blank"
+            class="social-icon"
+          >
+            <i class="fab fa-instagram"></i>
+          </a>
+          <a
+            href="https://www.youtube.com/@blessolawuyi"
+            target="_blank"
+            class="social-icon"
+          >
+            <i class="fab fa-youtube"></i>
+          </a>
+        </div>
+      </div>
+    </footer>
+
+    <script src="scripts.js"></script>
+  </body>
+</html>
