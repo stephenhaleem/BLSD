@@ -80,34 +80,13 @@ document.addEventListener("DOMContentLoaded", () => {
   if (hamburger && navLinks) {
     hamburger.addEventListener("click", () => {
       navLinks.classList.toggle("active");
-      if (navLinks.classList.contains("active")) {
-        // Slide in menu from left with delayed animations for each link
-        gsap.fromTo(
-          navLinks,
-          { x: "-100%", opacity: 0 },
-          { x: "0%", opacity: 1, duration: 0.5, ease: "power2.out" }
-        );
-        gsap.fromTo(
-          navLinks.children,
-          { x: -50, opacity: 0 },
-          {
-            x: 0,
-            opacity: 1,
-            duration: 0.5,
-            stagger: 0.1, // 0.1s delay between each child
-            ease: "power2.out",
-          }
-        );
-      } else {
-        // Slide out menu when closing
-        gsap.to(navLinks, {
-          x: "-100%",
-          opacity: 0,
-          duration: 0.5,
-          ease: "power2.out",
-        });
-      }
+      gsap.fromTo(
+        navLinks,
+        { opacity: 0, y: -20 },
+        { opacity: 1, y: 0, duration: 0.3, ease: "power2.out" }
+      );
     });
+
     // Accessibility: Toggle menu with Enter or Space key
     hamburger.addEventListener("keydown", (e) => {
       if (e.key === "Enter" || e.key === " ") {
@@ -140,33 +119,29 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Calculator Logic and Event Listener
   const calcForm = document.getElementById("mortgageForm");
-  const calcButton = calcForm
-    ? calcForm.querySelector('button[type="submit"]')
-    : null;
+  const resultCard = document.getElementById("result");
 
-  if (!calcForm) {
-    console.error(
-      'Mortgage form not found! Ensure the form has id="mortgageForm".'
-    );
-    return;
+  if (calcForm && resultCard) {
+    calcForm.addEventListener("reset", () => {
+      const resultSpan = resultCard.querySelector("span");
+      if (resultSpan) {
+        resultSpan.textContent = "CAD $0";
+      }
+    });
+
+    calcForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      calculateMortgage();
+    });
+
+    const calcButton = calcForm.querySelector('button[type="submit"]');
+    if (calcButton) {
+      calcButton.addEventListener("click", (e) => {
+        e.preventDefault();
+        calculateMortgage();
+      });
+    }
   }
-
-  if (!calcButton) {
-    console.error("Submit button not found in the form!");
-    return;
-  }
-
-  // Primary event listener on form submission
-  calcForm.addEventListener("submit", (e) => {
-    e.preventDefault();
-    calculateMortgage();
-  });
-
-  // Fallback event listener on button click
-  calcButton.addEventListener("click", (e) => {
-    e.preventDefault();
-    calculateMortgage();
-  });
 
   function calculateMortgage() {
     console.log("Calculating mortgage...");
@@ -209,20 +184,15 @@ document.addEventListener("DOMContentLoaded", () => {
     console.log("Monthly Payment:", monthlyPayment, "Result:", result);
 
     // Update the result
-    const resultCard = document.getElementById("result");
-    if (resultCard) {
-      const resultSpan = resultCard.querySelector("span");
-      if (resultSpan) {
-        const displayText =
-          result === "Error" ? "Calculation Error" : "CAD $" + result;
-        console.log("Setting textContent to:", displayText);
-        resultSpan.textContent = displayText;
-        animateResult(resultCard);
-      } else {
-        console.error("Result span not found!");
-      }
+    const resultSpan = resultCard.querySelector("span");
+    if (resultSpan) {
+      const displayText =
+        result === "Error" ? "Calculation Error" : "CAD $" + result;
+      console.log("Setting textContent to:", displayText);
+      resultSpan.textContent = displayText;
+      animateResult(resultCard);
     } else {
-      console.error("Result card not found!");
+      console.error("Result span not found!");
     }
   }
 

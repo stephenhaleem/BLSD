@@ -63,7 +63,7 @@ section {
 }
 
 .loader {
-  font-size: 2rem;
+  font-size: 0.1rem;
   color: #ffd700;
   font-family: "Hubot Sans", sans-serif;
 }
@@ -139,6 +139,9 @@ section {
 @media (max-width: 768px) {
   .hamburger {
     display: block;
+  }
+  .navbar {
+    background: rgba(26, 26, 26, 0.95);
   }
   .nav-links {
     display: none;
@@ -265,12 +268,28 @@ header {
   cursor: pointer;
   transition: transform 0.3s;
   font-family: "Hubot Sans", sans-serif;
+  margin-right: 1rem;
 }
 
 .calculator button:hover {
   transform: scale(1.05);
 }
+.reset-btn {
+  padding: 0.75rem 1.5rem;
+  background: #ffd700;
+  color: #1a1a1a;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform 0.3s;
+  font-family: "Hubot Sans", sans-serif;
+  font-weight: bold;
+  margin-left: 1rem; /* Add some space between the buttons */
+}
 
+.reset-btn:hover {
+  transform: scale(1.05);
+}
 .result-card {
   margin-top: 1.5rem;
   padding: 1.5rem;
@@ -334,6 +353,10 @@ header {
     flex-direction: row;
     align-items: center;
     justify-content: center;
+  }
+  .result-card {
+    max-width: 600px; /* Shorter length on desktop */
+    padding: 1.25rem;
   }
 }
 
