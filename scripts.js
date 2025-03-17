@@ -1,46 +1,13 @@
 document.addEventListener("DOMContentLoaded", () => {
   // Preloader
   window.addEventListener("load", () => {
-    gsap.to("#preloader", {
-      opacity: 0,
-      duration: 1,
-      onComplete: () => {
-        document.getElementById("preloader").style.display = "none";
-      },
-    });
-  });
-
-  // Header Animations
-  gsap.from(".header-content h1", {
-    y: -100,
-    opacity: 0,
-    duration: 1.5,
-    ease: "power3.out",
-  });
-  gsap.from(".header-content p", {
-    y: 100,
-    opacity: 0,
-    duration: 1.5,
-    delay: 0.5,
-    ease: "power3.out",
-  });
-  gsap.from(".cta-button", {
-    y: 50,
-    opacity: 0,
-    duration: 1,
-    delay: 1,
-    ease: "power3.out",
-  });
-
-  // Parallax Background
-  const isMobile = window.innerWidth <= 768;
-  gsap.to(".parallax-bg", {
-    yPercent: isMobile ? 0 : 0,
-    ease: "none",
-    scrollTrigger: {
-      trigger: "header",
-      scrub: true,
-    },
+    const preloader = document.getElementById("preloader");
+    if (preloader) {
+      preloader.style.opacity = 0;
+      setTimeout(() => {
+        preloader.style.display = "none";
+      }, 500);
+    }
   });
 
   // Navigation Bar Scroll Effect
@@ -80,11 +47,6 @@ document.addEventListener("DOMContentLoaded", () => {
   if (hamburger && navLinks) {
     hamburger.addEventListener("click", () => {
       navLinks.classList.toggle("active");
-      gsap.fromTo(
-        navLinks,
-        { opacity: 0, y: -20 },
-        { opacity: 1, y: 0, duration: 0.3, ease: "power2.out" }
-      );
     });
 
     // Accessibility: Toggle menu with Enter or Space key
@@ -92,11 +54,6 @@ document.addEventListener("DOMContentLoaded", () => {
       if (e.key === "Enter" || e.key === " ") {
         e.preventDefault();
         navLinks.classList.toggle("active");
-        gsap.fromTo(
-          navLinks,
-          { opacity: 0, y: -20 },
-          { opacity: 1, y: 0, duration: 0.3, ease: "power2.out" }
-        );
       }
     });
 
@@ -106,15 +63,6 @@ document.addEventListener("DOMContentLoaded", () => {
         navLinks.classList.remove("active");
       });
     });
-  }
-
-  // Calculator Animation Function
-  function animateResult(resultCard) {
-    gsap.fromTo(
-      resultCard,
-      { scale: 0.5, opacity: 0 },
-      { scale: 1, opacity: 1, duration: 1, ease: "back.out(1.7)" }
-    );
   }
 
   // Calculator Logic and Event Listener
@@ -146,7 +94,6 @@ document.addEventListener("DOMContentLoaded", () => {
   function calculateMortgage() {
     console.log("Calculating mortgage...");
 
-    // Get and validate inputs
     const loanAmountInput = document.getElementById("loanAmount");
     const interestRateInput = document.getElementById("interestRate");
     const loanTermInput = document.getElementById("loanTerm");
@@ -173,7 +120,6 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    // Calculate monthly payment
     const monthlyRate = interestRate / 100 / 12;
     const numberOfPayments = loanTerm * 12;
     const monthlyPayment =
@@ -183,60 +129,73 @@ document.addEventListener("DOMContentLoaded", () => {
 
     console.log("Monthly Payment:", monthlyPayment, "Result:", result);
 
-    // Update the result
     const resultSpan = resultCard.querySelector("span");
     if (resultSpan) {
       const displayText =
         result === "Error" ? "Calculation Error" : "CAD $" + result;
       console.log("Setting textContent to:", displayText);
       resultSpan.textContent = displayText;
-      animateResult(resultCard);
+      resultCard.style.display = "block";
+      // Refresh AOS to trigger animation on result card
+      if (typeof AOS !== "undefined") AOS.refresh();
     } else {
       console.error("Result span not found!");
     }
   }
-
-  // Bio Animation
-  gsap.from(".bio-img", {
-    rotationX: isMobile ? 180 : 360,
-    scale: 0,
-    duration: isMobile ? 1 : 1.5,
-    ease: "elastic.out(1, 0.5)",
-    scrollTrigger: { trigger: "#bio" },
-  });
-  gsap.from(".bio p", {
-    x: -200,
-    opacity: 0,
-    duration: 1,
-    delay: 0.5,
-    scrollTrigger: { trigger: "#bio" },
-  });
-
-  // Gallery Animation
-  gsap.utils.toArray(".carousel-item").forEach((item, i) => {
-    gsap.from(item, {
-      x: 300,
-      opacity: 0,
-      duration: 1,
-      delay: i * 0.2,
-      scrollTrigger: { trigger: "#gallery" },
-    });
-
-    if (!isMobile) {
-      item.addEventListener("mouseenter", () => {
-        gsap.to(item, { scale: 1.1, duration: 0.5 });
-        gsap.to(
-          gsap.utils.toArray(".carousel-item").filter((el) => el !== item),
-          { filter: "brightness(0.5)", duration: 0.5 }
-        );
-      });
-      item.addEventListener("mouseleave", () => {
-        gsap.to(item, { scale: 1, duration: 0.5 });
-        gsap.to(".carousel-item", { filter: "brightness(1)", duration: 0.5 });
+  // Add 'loaded' class to carousel items when images load
+  const carouselItems = document.querySelectorAll(".carousel-item img");
+  carouselItems.forEach((img) => {
+    // If the image is already loaded (e.g., cached), add the class immediately
+    if (img.complete) {
+      img.closest(".carousel-item").classList.add("loaded");
+    } else {
+      // Otherwise, wait for the load event
+      img.addEventListener("load", () => {
+        img.closest(".carousel-item").classList.add("loaded");
       });
     }
   });
+  // Preload images when they’re near the viewport
+  const lazyImages = document.querySelectorAll(".carousel-item picture img");
+  const observer = new IntersectionObserver(
+    (entries, observer) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const img = entry.target;
+          img.src = img.src; // Trigger loading
+          observer.unobserve(img);
+        }
+      });
+    },
+    { rootMargin: "200px" }
+  );
 
+  lazyImages.forEach((img) => observer.observe(img));
+
+  // Ensure AOS animations wait for images to load
+  const carouselImages = document.querySelectorAll(
+    ".carousel-item picture img"
+  );
+  carouselImages.forEach((img) => {
+    img.addEventListener("load", () => {
+      if (typeof AOS !== "undefined") AOS.refresh();
+    });
+  });
+
+  // Add 'loaded' class to carousel items when images load
+  carouselImages.forEach((img) => {
+    if (img.complete) {
+      img.closest(".carousel-item").classList.add("loaded");
+    } else {
+      img.addEventListener("load", () => {
+        img.closest(".carousel-item").classList.add("loaded");
+      });
+      // Handle error case (e.g., broken image URL)
+      img.addEventListener("error", () => {
+        img.closest(".carousel-item").classList.add("loaded");
+      });
+    }
+  });
   // Carousel Navigation with Arrows and Swipe Support
   const carousel = document.querySelector(".carousel");
   const items = document.querySelectorAll(".carousel-item");
@@ -252,7 +211,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const maxIndex = Math.floor(
       (items.length * itemWidth - totalWidth) / itemWidth
     );
-    if (currentIndex > maxIndex) currentIndex = maxIndex; // Prevent over-scrolling
+    if (currentIndex > maxIndex) currentIndex = maxIndex;
     carousel.style.transform = `translateX(-${currentIndex * itemWidth}px)`;
   }
 
@@ -260,7 +219,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (currentIndex < items.length - 1) {
       currentIndex++;
     } else {
-      currentIndex = 0; // Loop back to start
+      currentIndex = 0;
     }
     updateCarousel();
   }
@@ -269,12 +228,11 @@ document.addEventListener("DOMContentLoaded", () => {
     if (currentIndex > 0) {
       currentIndex--;
     } else {
-      currentIndex = items.length - 1; // Loop to end
+      currentIndex = items.length - 1;
     }
     updateCarousel();
   }
 
-  // Add arrow buttons dynamically
   if (carousel) {
     const prevButton = document.createElement("button");
     prevButton.className = "carousel-arrow prev";
@@ -288,13 +246,9 @@ document.addEventListener("DOMContentLoaded", () => {
     prevButton.addEventListener("click", showPrev);
     nextButton.addEventListener("click", showNext);
 
-    // Initial setup
     updateCarousel();
-
-    // Adjust on window resize
     window.addEventListener("resize", updateCarousel);
 
-    // Swipe Support for Mobile
     carousel.addEventListener("touchstart", (e) => {
       touchStartX = e.touches[0].clientX;
     });
@@ -305,7 +259,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     carousel.addEventListener("touchend", () => {
       const swipeDistance = touchStartX - touchEndX;
-
       if (Math.abs(swipeDistance) > swipeThreshold) {
         if (swipeDistance > 0) {
           showNext();
@@ -320,32 +273,22 @@ document.addEventListener("DOMContentLoaded", () => {
   const modal = document.getElementById("imageModal");
   const modalImage = document.getElementById("modalImage");
   const closeModal = document.querySelector(".close");
-  const themeToggleButton = document.getElementById("themeToggle");
 
   if (modal && modalImage && closeModal) {
     document.querySelectorAll(".carousel-item img").forEach((img) => {
       img.addEventListener("click", () => {
         modal.style.display = "flex";
         modalImage.src = img.src;
-        if (themeToggleButton) {
-          themeToggleButton.style.display = "none"; // Hide the theme toggle button
-        }
       });
     });
 
     closeModal.addEventListener("click", () => {
       modal.style.display = "none";
-      if (themeToggleButton) {
-        themeToggleButton.style.display = "block"; // Show the theme toggle button
-      }
     });
 
     modal.addEventListener("click", (e) => {
       if (e.target === modal) {
         modal.style.display = "none";
-        if (themeToggleButton) {
-          themeToggleButton.style.display = "block"; // Show the theme toggle button
-        }
       }
     });
   }
@@ -355,34 +298,13 @@ document.addEventListener("DOMContentLoaded", () => {
   const formResponse = document.getElementById("formResponse");
 
   if (contactForm && formResponse) {
-    // Animate form elements on load
-    gsap.from(".form-group", {
-      opacity: 0,
-      y: 50,
-      stagger: 0.2,
-      duration: 1,
-      ease: "power3.out",
-      scrollTrigger: {
-        trigger: "#contact",
-        start: "top 80%",
-      },
-    });
-
-    // Handle form submission
     contactForm.addEventListener("submit", (e) => {
       e.preventDefault();
       const name = document.getElementById("name").value;
       const email = document.getElementById("email").value;
       const message = document.getElementById("message").value;
 
-      // Simple validation
       if (name && email && message) {
-        gsap.to(".submit-btn", {
-          scale: 1.1,
-          duration: 0.3,
-          yoyo: true,
-          repeat: 1,
-        });
         formResponse.textContent =
           "Thank you for your message! We will get back to you soon.";
         formResponse.classList.add("visible");
@@ -416,7 +338,6 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
 
-    // Accessibility: Allow Enter or Space key to trigger back-to-top
     backToTopButton.addEventListener("keydown", (e) => {
       if (e.key === "Enter" || e.key === " ") {
         e.preventDefault();

@@ -101,6 +101,9 @@ section {
   display: flex;
   list-style: none;
   gap: 1.5rem;
+  transition: transform 0.5s ease, opacity 0.5s ease; /* Smooth transition for slide-in */
+  opacity: 0; /* Start hidden */
+  transform: translateY(-20px); /* Start position */
 }
 
 .nav-links li {
@@ -126,6 +129,18 @@ section {
 
 .nav-links a::after {
   content: none;
+}
+.nav-links.active li:nth-child(1) {
+  transition-delay: 0.1s;
+}
+.nav-links.active li:nth-child(2) {
+  transition-delay: 0.2s;
+}
+.nav-links.active li:nth-child(3) {
+  transition-delay: 0.3s;
+}
+.nav-links.active li:nth-child(4) {
+  transition-delay: 0.4s;
 }
 
 /* Hamburger Menu */
@@ -155,12 +170,23 @@ section {
     text-align: center;
   }
   .nav-links.active {
-    display: flex;
-    animation: slideDown 0.3s ease;
+    display: flex; /* Already handled by media query */
+    opacity: 1;
+    transform: translateY(0); /* Slide down to visible */
+  }
+  .nav-links.active li {
+    opacity: 1;
+    transform: translateX(0); /* Move to visible */
   }
   .nav-links a:hover {
     background-color: rgba(255, 215, 0, 0.3);
     transform: scale(1.1);
+  }
+}
+@media (min-width: 769px) {
+  .nav-links {
+    opacity: 1; /* Ensure nav links are visible */
+    transform: translateY(0); /* Reset transform */
   }
 }
 
@@ -182,7 +208,7 @@ header {
   left: 0;
   width: 100%;
   height: 100vh;
-  background: url("images/portrait-engineers-work-hours-job-site.jpg")
+  background: url("images/portrait-engineers-work-hours-job-site.webp")
     center/cover no-repeat;
   background-position: 50% 30%;
   z-index: -2;
@@ -396,6 +422,9 @@ header {
   min-width: 0;
   flex: 0 0 calc(33.33% - 1rem);
   max-width: 400px;
+  background: #2c2c2c; /* Placeholder background */
+  position: relative;
+  overflow: hidden;
 }
 
 .carousel-item img {
@@ -409,6 +438,33 @@ header {
 
 .carousel-item img[loading="lazy"] {
   opacity: 1;
+}
+/* Skeleton loader effect */
+.carousel-item::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, #2c2c2c 25%, #3a3a3a 50%, #2c2c2c 75%);
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s infinite;
+  border-radius: 10px;
+  z-index: 1;
+}
+
+.carousel-item.loaded::before {
+  display: none;
+}
+
+@keyframes skeleton-loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
 }
 
 /* Media Query for Mobile */
@@ -808,6 +864,7 @@ footer {
   text-decoration: underline;
 }
 
+/* Animations */
 /* Animations */
 @keyframes fadeInDown {
   from {
