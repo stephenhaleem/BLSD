@@ -196,6 +196,23 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     }
   });
+  // Debounce function to limit the rate at which a function can fire
+  function debounce(func, wait = 20, immediate = true) {
+    let timeout;
+    return function () {
+      const context = this,
+        args = arguments;
+      const later = function () {
+        timeout = null;
+        if (!immediate) func.apply(context, args);
+      };
+      const callNow = immediate && !timeout;
+      clearTimeout(timeout);
+      timeout = setTimeout(later, wait);
+      if (callNow) func.apply(context, args);
+    };
+  }
+
   // Carousel Navigation with Arrows and Swipe Support
   const carousel = document.querySelector(".carousel");
   const items = document.querySelectorAll(".carousel-item");
@@ -221,7 +238,7 @@ document.addEventListener("DOMContentLoaded", () => {
     } else {
       currentIndex = 0;
     }
-    updateCarousel();
+    requestAnimationFrame(updateCarousel);
   }
 
   function showPrev() {
@@ -230,7 +247,7 @@ document.addEventListener("DOMContentLoaded", () => {
     } else {
       currentIndex = items.length - 1;
     }
-    updateCarousel();
+    requestAnimationFrame(updateCarousel);
   }
 
   if (carousel) {
@@ -247,7 +264,7 @@ document.addEventListener("DOMContentLoaded", () => {
     nextButton.addEventListener("click", showNext);
 
     updateCarousel();
-    window.addEventListener("resize", updateCarousel);
+    window.addEventListener("resize", debounce(updateCarousel));
 
     carousel.addEventListener("touchstart", (e) => {
       touchStartX = e.touches[0].clientX;
@@ -268,6 +285,11 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   }
+
+  // Apply will-change property to carousel items for smoother animations
+  items.forEach((item) => {
+    item.style.willChange = "transform";
+  });
 
   // Image Modal Functionality
   const modal = document.getElementById("imageModal");
