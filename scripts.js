@@ -1,4 +1,13 @@
 document.addEventListener("DOMContentLoaded", () => {
+  // Debounce function to limit scroll event frequency
+  function debounce(func, wait) {
+    let timeout;
+    return function (...args) {
+      clearTimeout(timeout);
+      timeout = setTimeout(() => func.apply(this, args), wait);
+    };
+  }
+
   // Preloader
   window.addEventListener("load", () => {
     const preloader = document.getElementById("preloader");
@@ -22,8 +31,20 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  window.addEventListener("scroll", onScroll);
-  onScroll(); // Initialize the state on page load
+  window.addEventListener("scroll", debounce(onScroll, 10));
+  onScroll();
+
+  // Parallax Effect for Hero Section
+  window.addEventListener(
+    "scroll",
+    debounce(() => {
+      const scrollPosition = window.scrollY;
+      const parallaxBg = document.querySelector(".parallax-bg");
+      if (parallaxBg) {
+        parallaxBg.style.backgroundPositionY = `${30 + scrollPosition * 0.2}%`;
+      }
+    }, 10)
+  );
 
   // Smooth Scrolling for Anchor Links
   document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
@@ -33,7 +54,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const targetElement = document.getElementById(targetId);
       if (targetElement) {
         window.scrollTo({
-          top: targetElement.offsetTop - 70, // Adjust for fixed navbar height
+          top: targetElement.offsetTop - 70,
           behavior: "smooth",
         });
       }
@@ -49,7 +70,6 @@ document.addEventListener("DOMContentLoaded", () => {
       navLinks.classList.toggle("active");
     });
 
-    // Accessibility: Toggle menu with Enter or Space key
     hamburger.addEventListener("keydown", (e) => {
       if (e.key === "Enter" || e.key === " ") {
         e.preventDefault();
@@ -57,7 +77,6 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
 
-    // Close menu when a link is clicked
     navLinks.querySelectorAll("a").forEach((link) => {
       link.addEventListener("click", () => {
         navLinks.classList.remove("active");
@@ -93,7 +112,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function calculateMortgage() {
     console.log("Calculating mortgage...");
-
     const loanAmountInput = document.getElementById("loanAmount");
     const interestRateInput = document.getElementById("interestRate");
     const loanTermInput = document.getElementById("loanTerm");
@@ -134,27 +152,26 @@ document.addEventListener("DOMContentLoaded", () => {
       const displayText =
         result === "Error" ? "Calculation Error" : "CAD $" + result;
       console.log("Setting textContent to:", displayText);
-      resultSpan.textContent = displayText;
+      resultSpan.textContentments.textContent = displayText;
       resultCard.style.display = "block";
-      // Refresh AOS to trigger animation on result card
       if (typeof AOS !== "undefined") AOS.refresh();
     } else {
       console.error("Result span not found!");
     }
   }
+
   // Add 'loaded' class to carousel items when images load
   const carouselItems = document.querySelectorAll(".carousel-item img");
   carouselItems.forEach((img) => {
-    // If the image is already loaded (e.g., cached), add the class immediately
     if (img.complete) {
       img.closest(".carousel-item").classList.add("loaded");
     } else {
-      // Otherwise, wait for the load event
       img.addEventListener("load", () => {
         img.closest(".carousel-item").classList.add("loaded");
       });
     }
   });
+
   // Preload images when they’re near the viewport
   const lazyImages = document.querySelectorAll(".carousel-item picture img");
   const observer = new IntersectionObserver(
@@ -162,7 +179,7 @@ document.addEventListener("DOMContentLoaded", () => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           const img = entry.target;
-          img.src = img.src; // Trigger loading
+          img.src = img.src;
           observer.unobserve(img);
         }
       });
@@ -182,7 +199,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // Add 'loaded' class to carousel items when images load
   carouselImages.forEach((img) => {
     if (img.complete) {
       img.closest(".carousel-item").classList.add("loaded");
@@ -190,28 +206,11 @@ document.addEventListener("DOMContentLoaded", () => {
       img.addEventListener("load", () => {
         img.closest(".carousel-item").classList.add("loaded");
       });
-      // Handle error case (e.g., broken image URL)
       img.addEventListener("error", () => {
         img.closest(".carousel-item").classList.add("loaded");
       });
     }
   });
-  // Debounce function to limit the rate at which a function can fire
-  function debounce(func, wait = 20, immediate = true) {
-    let timeout;
-    return function () {
-      const context = this,
-        args = arguments;
-      const later = function () {
-        timeout = null;
-        if (!immediate) func.apply(context, args);
-      };
-      const callNow = immediate && !timeout;
-      clearTimeout(timeout);
-      timeout = setTimeout(later, wait);
-      if (callNow) func.apply(context, args);
-    };
-  }
 
   // Carousel Navigation with Arrows and Swipe Support
   const carousel = document.querySelector(".carousel");
@@ -223,13 +222,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function updateCarousel() {
     const itemWidth =
-      items[0].clientWidth + parseFloat(getComputedStyle(carousel).gap || "0");
+      items[0].offsetWidth + parseFloat(getComputedStyle(carousel).gap || "0");
     const totalWidth = carousel.clientWidth;
-    const maxIndex = Math.floor(
-      (items.length * itemWidth - totalWidth) / itemWidth
+    const maxIndex = Math.max(
+      0,
+      items.length - Math.floor(totalWidth / itemWidth)
     );
     if (currentIndex > maxIndex) currentIndex = maxIndex;
+    if (currentIndex < 0) currentIndex = 0;
     carousel.style.transform = `translateX(-${currentIndex * itemWidth}px)`;
+    carousel.style.transition = "transform 0.5s ease";
   }
 
   function showNext() {
@@ -238,7 +240,7 @@ document.addEventListener("DOMContentLoaded", () => {
     } else {
       currentIndex = 0;
     }
-    requestAnimationFrame(updateCarousel);
+    updateCarousel();
   }
 
   function showPrev() {
@@ -247,7 +249,7 @@ document.addEventListener("DOMContentLoaded", () => {
     } else {
       currentIndex = items.length - 1;
     }
-    requestAnimationFrame(updateCarousel);
+    updateCarousel();
   }
 
   if (carousel) {
@@ -264,7 +266,7 @@ document.addEventListener("DOMContentLoaded", () => {
     nextButton.addEventListener("click", showNext);
 
     updateCarousel();
-    window.addEventListener("resize", debounce(updateCarousel));
+    window.addEventListener("resize", updateCarousel);
 
     carousel.addEventListener("touchstart", (e) => {
       touchStartX = e.touches[0].clientX;
@@ -285,11 +287,6 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   }
-
-  // Apply will-change property to carousel items for smoother animations
-  items.forEach((item) => {
-    item.style.willChange = "transform";
-  });
 
   // Image Modal Functionality
   const modal = document.getElementById("imageModal");
@@ -345,13 +342,16 @@ document.addEventListener("DOMContentLoaded", () => {
   // Back to Top Button
   const backToTopButton = document.getElementById("backToTop");
   if (backToTopButton) {
-    window.addEventListener("scroll", () => {
-      if (window.scrollY > 300) {
-        backToTopButton.classList.add("visible");
-      } else {
-        backToTopButton.classList.remove("visible");
-      }
-    });
+    window.addEventListener(
+      "scroll",
+      debounce(() => {
+        if (window.scrollY > 300) {
+          backToTopButton.classList.add("visible");
+        } else {
+          backToTopButton.classList.remove("visible");
+        }
+      }, 10)
+    );
 
     backToTopButton.addEventListener("click", () => {
       window.scrollTo({
@@ -371,23 +371,40 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // CTA Overlay on Scroll
+  // CTA Overlay on Scroll (Visible on all sections except contact)
   const ctaOverlay = document.getElementById("ctaOverlay");
-  const gallerySection = document.getElementById("gallery");
-  const footer = document.querySelector("footer");
+  const contactSection = document.getElementById("contact");
+  const sections = document.querySelectorAll("section:not(#contact)");
 
-  if (ctaOverlay && gallerySection && footer) {
-    window.addEventListener("scroll", () => {
-      const galleryBottom = gallerySection.getBoundingClientRect().bottom;
-      const footerTop = footer.getBoundingClientRect().top;
-      if (
-        galleryBottom < window.innerHeight &&
-        footerTop > window.innerHeight
-      ) {
-        ctaOverlay.classList.add("visible");
-      } else {
-        ctaOverlay.classList.remove("visible");
-      }
-    });
+  if (ctaOverlay) {
+    window.addEventListener(
+      "scroll",
+      debounce(() => {
+        const scrollPosition = window.scrollY + window.innerHeight;
+        const contactTop =
+          contactSection.getBoundingClientRect().top + window.scrollY;
+        let isVisible = false;
+
+        sections.forEach((section) => {
+          const sectionTop =
+            section.getBoundingClientRect().top + window.scrollY;
+          const sectionBottom = sectionTop + section.offsetHeight;
+          if (
+            scrollPosition > sectionTop &&
+            window.scrollY < sectionBottom - 100
+          ) {
+            isVisible = true;
+          }
+        });
+
+        if (scrollPosition > contactTop) {
+          ctaOverlay.classList.remove("visible");
+        } else if (isVisible) {
+          ctaOverlay.classList.add("visible");
+        } else {
+          ctaOverlay.classList.remove("visible");
+        }
+      }, 10)
+    );
   }
 });

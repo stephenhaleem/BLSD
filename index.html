@@ -59,7 +59,12 @@
       as="image"
       type="image/webp"
     />
-    <link rel="prefetch" href="images/8214.webp" as="image" type="image/webp" />
+    <link
+      rel="prefetch"
+      href="images/8214 .webp"
+      as="image"
+      type="image/webp"
+    />
     <link
       rel="prefetch"
       href="images/IMG_8215.webp"
@@ -85,7 +90,6 @@
         <li><a href="#contact">Contact</a></li>
       </ul>
       <div class="hamburger" aria-label="Toggle Navigation Menu">☰</div>
-      <!-- Theme Toggle Button -->
     </nav>
 
     <!-- Header -->
@@ -95,13 +99,29 @@
         <h1 data-aos="fade-up" data-aos-delay="200">BLSD GROUP INC</h1>
         <p data-aos="fade-up" data-aos-delay="300">YOUR NEEDS ARE PRIORITY</p>
         <a
-          href="#calculator"
+          href="https://www.realtor.ca/map#Zoom=12&Lat=51.0447&Long=-114.0719"
           class="cta-button"
           data-aos="fade-up"
           data-aos-delay="400"
-          >Get Started</a
+          target="_blank"
+          rel="noopener noreferrer"
+          >View Listings <span class="arrow"> →</span></a
         >
-        <canvas id="particles"></canvas>
+        <style>
+          .cta-button .arrow {
+            display: inline-block;
+            position: relative;
+            animation: moveArrow 0.6s infinite alternate ease-in-out;
+          }
+          @keyframes moveArrow {
+            from {
+              transform: translateX(0);
+            }
+            to {
+              transform: translateX(5px);
+            }
+          }
+        </style>
       </div>
     </header>
 
@@ -153,6 +173,7 @@
           alt="Profile"
           class="bio-img"
           loading="lazy"
+          decoding="async"
           data-aos="zoom-in"
           data-aos-delay="300"
         />
@@ -173,7 +194,12 @@
       </div>
     </section>
 
-    <section class="gallery" id="gallery">
+    <section
+      class="gallery"
+      id="gallery"
+      data-aos="fade-up"
+      data-aos-delay="100"
+    >
       <h2 data-aos="fade-up" data-aos-delay="200">Masterpieces</h2>
       <div class="section-divider"></div>
       <div class="carousel">
@@ -183,9 +209,10 @@
             <img
               src="images/IMG_8208.jpg"
               alt="Work 1"
-              width="200"
+              width="400"
               height="300"
               loading="lazy"
+              decoding="async"
               data-aos="fade-up"
               data-aos-delay="300"
             />
@@ -197,9 +224,10 @@
             <img
               src="images/IMG_8209.jpg"
               alt="Work 2"
-              width="200"
+              width="400"
               height="300"
               loading="lazy"
+              decoding="async"
               data-aos="fade-up"
               data-aos-delay="400"
             />
@@ -211,9 +239,10 @@
             <img
               src="images/IMG_8210.jpg"
               alt="Work 3"
-              width="200"
+              width="400"
               height="300"
               loading="lazy"
+              decoding="async"
               data-aos="fade-up"
               data-aos-delay="500"
             />
@@ -225,9 +254,10 @@
             <img
               src="images/IMG_8211.jpg"
               alt="Work 4"
-              width="200"
+              width="400"
               height="300"
               loading="lazy"
+              decoding="async"
               data-aos="fade-up"
               data-aos-delay="600"
             />
@@ -239,9 +269,10 @@
             <img
               src="images/IMG_8212.jpg"
               alt="Work 5"
-              width="200"
+              width="400"
               height="300"
               loading="lazy"
+              decoding="async"
               data-aos="fade-up"
               data-aos-delay="700"
             />
@@ -253,9 +284,10 @@
             <img
               src="images/IMG_8213.jpg"
               alt="Work 6"
-              width="200"
+              width="400"
               height="300"
               loading="lazy"
+              decoding="async"
               data-aos="fade-up"
               data-aos-delay="800"
             />
@@ -263,13 +295,14 @@
         </div>
         <div class="carousel-item">
           <picture>
-            <source srcset="images/8214.webp" type="image/webp" />
+            <source srcset="images/8214 .webp" type="image/webp" />
             <img
               src="images/8214.jpg"
               alt="Work 7"
-              width="200"
+              width="400"
               height="300"
               loading="lazy"
+              decoding="async"
               data-aos="fade-up"
               data-aos-delay="900"
             />
@@ -281,9 +314,10 @@
             <img
               src="images/IMG_8215.jpg"
               alt="Work 8"
-              width="200"
+              width="400"
               height="300"
               loading="lazy"
+              decoding="async"
               data-aos="fade-up"
               data-aos-delay="1000"
             />
@@ -331,7 +365,12 @@
       <h2 data-aos="fade-up" data-aos-delay="200">Contact Us</h2>
       <div class="section-divider"></div>
       <div class="contact-form">
-        <form id="contactForm">
+        <form id="contactForm" name="contact" method="post" data-netlify="true">
+          <input
+            type="hidden"
+            name="_gotcha"
+            style="display: none !important"
+          />
           <div class="form-group" data-aos="fade-up" data-aos-delay="300">
             <input
               type="text"
@@ -371,6 +410,45 @@
           </button>
         </form>
         <div id="formResponse" class="form-response"></div>
+
+        <script>
+          document
+            .getElementById("contactForm")
+            .addEventListener("submit", async function (event) {
+              event.preventDefault();
+              const form = event.target;
+              const formResponse = document.getElementById("formResponse");
+              const formData = new FormData(form);
+
+              try {
+                const response = await fetch("/", {
+                  method: "POST",
+                  body: formData,
+                });
+
+                if (response.ok) {
+                  formResponse.innerHTML =
+                    '<p class="success">Message sent successfully!</p>';
+                  form.reset();
+                } else {
+                  formResponse.innerHTML =
+                    '<p class="error">Error sending message. Please try again.</p>';
+                }
+              } catch (error) {
+                formResponse.innerHTML =
+                  '<p class="error">Error sending message. Please try again.</p>';
+              }
+            });
+        </script>
+
+        <style>
+          .success {
+            color: green;
+          }
+          .error {
+            color: red;
+          }
+        </style>
       </div>
     </section>
 
@@ -439,7 +517,6 @@
             <i class="fab fa-youtube"></i>
           </a>
         </div>
-        <p>made with passion by 1910</p>
       </div>
     </footer>
 
@@ -448,9 +525,10 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
       AOS.init({
-        duration: 800, // Animation duration in milliseconds
-        once: true, // Animations trigger only once
-        offset: 100, // Offset from the top of the viewport
+        duration: 800,
+        once: true,
+        offset: 100,
+        easing: "ease-out-cubic",
       });
     </script>
     <script>
