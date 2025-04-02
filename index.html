@@ -1,76 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta name="theme-color" content="#1B1B1B" />
-    <meta name="msapplication-navbutton-color" content="#1B1B1B" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="#1B1B1B" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>BLSD GROUP INC</title>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@400;600&display=swap"
-      rel="stylesheet"
+    <meta
+      name="description"
+      content="BLSD Group Inc - Real Estate and Media Services in Calgary"
     />
+    <meta
+      name="keywords"
+      content="real estate, Calgary, new constructions, presales, videography"
+    />
+    <meta name="author" content="BLSD Group Inc" />
+    <title>BLSD GROUP INC</title>
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+      integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
     />
-    <link rel="icon" type="image/png" href="favicon.png" />
-    <link rel="stylesheet" href="styles.css" />
-    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
     <style>
-      @import url("https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&family=Dela+Gothic+One&family=Dosis:wght@200..800&family=Hubot+Sans:ital,wght@0,200..900;1,200..900&family=Luckiest+Guy&family=Rowdies:wght@300;400;700&family=Tangerine:wght@400;700&display=swap");
+      @import url("https://fonts.googleapis.com/css2?family=Hubot+Sans:ital,wght@0,200..900;1,200..900&family=Rowdies:wght@300;400;700&display=swap");
     </style>
-    <!-- Prefetch Carousel Images -->
-    <link
-      rel="prefetch"
-      href="images/IMG_8208.webp"
-      as="image"
-      type="image/webp"
-    />
-    <link
-      rel="prefetch"
-      href="images/IMG_8209.webp"
-      as="image"
-      type="image/webp"
-    />
-    <link
-      rel="prefetch"
-      href="images/IMG_8210.webp"
-      as="image"
-      type="image/webp"
-    />
-    <link
-      rel="prefetch"
-      href="images/IMG_8211.webp"
-      as="image"
-      type="image/webp"
-    />
-    <link
-      rel="prefetch"
-      href="images/IMG_8212.webp"
-      as="image"
-      type="image/webp"
-    />
-    <link
-      rel="prefetch"
-      href="images/IMG_8213.webp"
-      as="image"
-      type="image/webp"
-    />
-    <link
-      rel="prefetch"
-      href="images/8214 .webp"
-      as="image"
-      type="image/webp"
-    />
-    <link
-      rel="prefetch"
-      href="images/IMG_8215.webp"
-      as="image"
-      type="image/webp"
-    />
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
+    <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
     <!-- Preloader -->
@@ -82,12 +37,21 @@
 
     <!-- Navigation Bar -->
     <nav class="navbar">
-      <div class="logo">BLSD</div>
+      <div class="logo">
+        <a href="index.html" class="logo-link">
+          <img
+            src="assets/blsd logoo (1).png"
+            alt="BLSD GROUP INC"
+            style="width: 80px"
+          />
+        </a>
+      </div>
       <ul class="nav-links">
+        <li><a href="#why-choose-us">Why Us</a></li>
+        <li><a href="#services">Services</a></li>
         <li><a href="#calculator">Mortgage Wizard</a></li>
-        <li><a href="#bio">About</a></li>
-        <li><a href="#gallery">Masterpieces</a></li>
-        <li><a href="#contact">Contact</a></li>
+        <li><a href="#gallery">Featured Properties</a></li>
+        <li><a href="about.html">About & Contact</a></li>
       </ul>
       <div class="hamburger" aria-label="Toggle Navigation Menu">☰</div>
     </nav>
@@ -96,8 +60,13 @@
     <header data-aos="fade-up" data-aos-delay="100">
       <div class="parallax-bg"></div>
       <div class="header-content">
-        <h1 data-aos="fade-up" data-aos-delay="200">BLSD GROUP INC</h1>
-        <p data-aos="fade-up" data-aos-delay="300">YOUR NEEDS ARE PRIORITY</p>
+        <h1 data-aos="fade-up" data-aos-delay="200">
+          Find Your Dream Home with BLSD Group Inc
+        </h1>
+        <p data-aos="fade-up" data-aos-delay="300">
+          Expert real estate services for buying, selling, and investing in
+          Calgary’s new constructions and presales.
+        </p>
         <a
           href="https://www.realtor.ca/map#Zoom=12&Lat=51.0447&Long=-114.0719"
           class="cta-button"
@@ -105,25 +74,102 @@
           data-aos-delay="400"
           target="_blank"
           rel="noopener noreferrer"
-          >View Listings <span class="arrow"> →</span></a
         >
-        <style>
-          .cta-button .arrow {
-            display: inline-block;
-            position: relative;
-            animation: moveArrow 0.6s infinite alternate ease-in-out;
-          }
-          @keyframes moveArrow {
-            from {
-              transform: translateX(0);
-            }
-            to {
-              transform: translateX(5px);
-            }
-          }
-        </style>
+          View Listings <span class="arrow"> →</span>
+        </a>
       </div>
     </header>
+
+    <!-- Why Choose Us Section -->
+    <section
+      class="why-choose-us"
+      id="why-choose-us"
+      data-aos="fade-up"
+      data-aos-delay="100"
+    >
+      <h2 data-aos="fade-up" data-aos-delay="200" style="color: #ffd700">
+        Why Choose BLSD Group Inc?
+      </h2>
+      <div class="section-divider"></div>
+      <div class="why-choose-content">
+        <div class="reason" data-aos="fade-up" data-aos-delay="300">
+          <h3>Expertise You Can Trust</h3>
+          <p>
+            With over a decade of experience in civil engineering and
+            construction, we bring unparalleled insight to every real estate
+            deal, ensuring you make informed decisions.
+          </p>
+        </div>
+        <div class="reason" data-aos="fade-up" data-aos-delay="400">
+          <h3>Personalized Service</h3>
+          <p>
+            We prioritize your needs, offering tailored solutions for
+            homebuyers, sellers, and investors in Calgary’s dynamic market.
+          </p>
+        </div>
+        <div class="reason" data-aos="fade-up" data-aos-delay="500">
+          <h3>Unique Blend of Skills</h3>
+          <p>
+            Combining real estate expertise with professional videography, we
+            showcase properties like no one else, giving your listings a
+            competitive edge.
+          </p>
+        </div>
+      </div>
+      <div class="company-overview" data-aos="fade-up" data-aos-delay="600">
+        <h3>About BLSD Group Inc</h3>
+        <p>
+          BLSD Group Inc is a Calgary-based real estate and media company
+          dedicated to helping clients achieve their property goals.
+          Specializing in new constructions, presales, and investments, we
+          combine industry knowledge with innovative marketing to deliver
+          exceptional results.
+        </p>
+      </div>
+    </section>
+
+    <!-- Services Section -->
+    <section
+      class="services"
+      id="services"
+      data-aos="fade-up"
+      data-aos-delay="100"
+    >
+      <h2 data-aos="fade-up" data-aos-delay="200" style="color: #ffd700">
+        Our Services
+      </h2>
+      <div class="section-divider"></div>
+      <div class="services-content">
+        <div class="service" data-aos="fade-up" data-aos-delay="300">
+          <h3>Home Buying</h3>
+          <p>
+            Find your perfect home with expert guidance tailored to your needs.
+            We specialize in new constructions and presales in Calgary.
+          </p>
+        </div>
+        <div class="service" data-aos="fade-up" data-aos-delay="400">
+          <h3>Home Selling</h3>
+          <p>
+            Sell your property quickly with top-tier marketing, including
+            professional videography, and skilled negotiation.
+          </p>
+        </div>
+        <div class="service" data-aos="fade-up" data-aos-delay="500">
+          <h3>Real Estate Investing</h3>
+          <p>
+            Grow your portfolio with strategic advice on presales, new builds,
+            and investment properties in Calgary’s market.
+          </p>
+        </div>
+        <div class="service" data-aos="fade-up" data-aos-delay="600">
+          <h3>Property Videography</h3>
+          <p>
+            Showcase your listings with stunning, professional videos that
+            capture attention and highlight every detail.
+          </p>
+        </div>
+      </div>
+    </section>
 
     <!-- Calculator Section -->
     <section
@@ -132,7 +178,13 @@
       data-aos="fade-up"
       data-aos-delay="100"
     >
-      <h2 data-aos="fade-up" data-aos-delay="200">Mortgage Wizard</h2>
+      <h2 data-aos="fade-up" data-aos-delay="200" style="color: #ffd700">
+        Mortgage Wizard
+      </h2>
+      <p data-aos="fade-up" data-aos-delay="300">
+        Want to find out your mortgage costs? Check out our free Mortgage Wizard
+        below!
+      </p>
       <div class="section-divider"></div>
       <div class="calc-container">
         <form id="mortgageForm">
@@ -163,170 +215,108 @@
       </div>
     </section>
 
-    <!-- Bio Section -->
-    <section class="bio" id="bio" data-aos="fade-up" data-aos-delay="100">
-      <h2 data-aos="fade-up" data-aos-delay="200">ABOUT ME</h2>
-      <div class="section-divider"></div>
-      <div class="bio-content">
-        <img
-          src="images/bless.jpg"
-          alt="Profile"
-          class="bio-img"
-          loading="lazy"
-          decoding="async"
-          data-aos="zoom-in"
-          data-aos-delay="300"
-        />
-        <p data-aos="fade-right" data-aos-delay="400">
-          Hi, I'm Blessing Olawuyi — a realtor, videographer, and entrepreneur
-          with a passion for helping people reach their goals. With over a
-          decade of experience in civil engineering and construction, I bring a
-          sharp eye for detail to every real estate transaction, helping clients
-          make informed decisions. As a Calgary-based realtor specializing in
-          new constructions, presales, and real estate investments, I guide
-          families and investors to properties that match their needs and goals.
-          My mission is to ensure a smooth process with transparency, knowledge,
-          and care. I also own a media company that tells unique stories through
-          video. From promoting businesses to showcasing properties, I use my
-          videography skills to highlight your brand. Additionally, I empower
-          others by teaching them how to create their own engaging content.
-        </p>
-      </div>
-    </section>
-
+    <!-- Gallery Section (Featured Properties) -->
     <section
       class="gallery"
       id="gallery"
       data-aos="fade-up"
       data-aos-delay="100"
     >
-      <h2 data-aos="fade-up" data-aos-delay="200">Masterpieces</h2>
+      <h2 data-aos="fade-up" data-aos-delay="200">Featured Properties</h2>
       <div class="section-divider"></div>
-      <div class="carousel">
-        <div class="carousel-item">
-          <picture>
-            <source srcset="images/IMG_8208.webp" type="image/webp" />
-            <img
-              src="images/IMG_8208.jpg"
-              alt="Work 1"
-              width="400"
-              height="300"
-              loading="lazy"
-              decoding="async"
-              data-aos="fade-up"
-              data-aos-delay="300"
-            />
-          </picture>
+      <div class="carousel-container">
+        
+        <div class="carousel">
+          <div class="carousel-item" data-aos="fade-up" data-aos-delay="300">
+            <picture>
+              <source srcset="images/IMG_8208.webp" type="image/webp" />
+              <img
+                src="images/IMG_8208.jpg"
+                alt="Modern Downtown Condo"
+                width="400"
+                height="300"
+                loading="lazy"
+                decoding="async"
+              />
+            </picture>
+            <p>Modern Downtown Condo - $450,000</p>
+          </div>
+          <div class="carousel-item" data-aos="fade-up" data-aos-delay="400">
+            <picture>
+              <source srcset="images/IMG_8209.webp" type="image/webp" />
+              <img
+                src="images/IMG_8209.jpg"
+                alt="Suburban Family Home"
+                width="400"
+                height="300"
+                loading="lazy"
+                decoding="async"
+              />
+            </picture>
+            <p>Suburban Family Home - $620,000</p>
+          </div>
+          <div class="carousel-item" data-aos="fade-up" data-aos-delay="500">
+            <picture>
+              <source srcset="images/IMG_8210.webp" type="image/webp" />
+              <img
+                src="images/IMG_8210.jpg"
+                alt="Luxury Apartments"
+                width="400"
+                height="300"
+                loading="lazy"
+                decoding="async"
+              />
+            </picture>
+            <p>Luxury Apartments - $1,000,000</p>
+          </div>
+          <div class="carousel-item" data-aos="fade-up" data-aos-delay="600">
+            <picture>
+              <source srcset="images/IMG_8211.webp" type="image/webp" />
+              <img
+                src="images/IMG_8211.jpg"
+                alt="Charming Bungalow"
+                width="400"
+                height="300"
+                loading="lazy"
+                decoding="async"
+              />
+            </picture>
+            <p>Charming Bungalow - $350,000</p>
+          </div>
+          <div class="carousel-item" data-aos="fade-up" data-aos-delay="700">
+            <picture>
+              <source srcset="images/IMG_8212.webp" type="image/webp" />
+              <img
+                src="images/IMG_8212.jpg"
+                alt="Stylish Townhouse"
+                width="400"
+                height="300"
+                loading="lazy"
+                decoding="async"
+              />
+            </picture>
+            <p>Stylish Townhouse - $480,000</p>
+          </div>
+          <div class="carousel-item" data-aos="fade-up" data-aos-delay="800">
+            <picture>
+              <source srcset="images/IMG_8213.webp" type="image/webp" />
+              <img
+                src="images/IMG_8213.jpg"
+                alt="Spacious Duplex"
+                width="400"
+                height="300"
+                loading="lazy"
+                decoding="async"
+              />
+            </picture>
+            <p>Spacious Duplex - $550,000</p>
         </div>
-        <div class="carousel-item">
-          <picture>
-            <source srcset="images/IMG_8209.webp" type="image/webp" />
-            <img
-              src="images/IMG_8209.jpg"
-              alt="Work 2"
-              width="400"
-              height="300"
-              loading="lazy"
-              decoding="async"
-              data-aos="fade-up"
-              data-aos-delay="400"
-            />
-          </picture>
-        </div>
-        <div class="carousel-item">
-          <picture>
-            <source srcset="images/IMG_8210.webp" type="image/webp" />
-            <img
-              src="images/IMG_8210.jpg"
-              alt="Work 3"
-              width="400"
-              height="300"
-              loading="lazy"
-              decoding="async"
-              data-aos="fade-up"
-              data-aos-delay="500"
-            />
-          </picture>
-        </div>
-        <div class="carousel-item">
-          <picture>
-            <source srcset="images/IMG_8211.webp" type="image/webp" />
-            <img
-              src="images/IMG_8211.jpg"
-              alt="Work 4"
-              width="400"
-              height="300"
-              loading="lazy"
-              decoding="async"
-              data-aos="fade-up"
-              data-aos-delay="600"
-            />
-          </picture>
-        </div>
-        <div class="carousel-item">
-          <picture>
-            <source srcset="images/IMG_8212.webp" type="image/webp" />
-            <img
-              src="images/IMG_8212.jpg"
-              alt="Work 5"
-              width="400"
-              height="300"
-              loading="lazy"
-              decoding="async"
-              data-aos="fade-up"
-              data-aos-delay="700"
-            />
-          </picture>
-        </div>
-        <div class="carousel-item">
-          <picture>
-            <source srcset="images/IMG_8213.webp" type="image/webp" />
-            <img
-              src="images/IMG_8213.jpg"
-              alt="Work 6"
-              width="400"
-              height="300"
-              loading="lazy"
-              decoding="async"
-              data-aos="fade-up"
-              data-aos-delay="800"
-            />
-          </picture>
-        </div>
-        <div class="carousel-item">
-          <picture>
-            <source srcset="images/8214 .webp" type="image/webp" />
-            <img
-              src="images/8214.jpg"
-              alt="Work 7"
-              width="400"
-              height="300"
-              loading="lazy"
-              decoding="async"
-              data-aos="fade-up"
-              data-aos-delay="900"
-            />
-          </picture>
-        </div>
-        <div class="carousel-item">
-          <picture>
-            <source srcset="images/IMG_8215.webp" type="image/webp" />
-            <img
-              src="images/IMG_8215.jpg"
-              alt="Work 8"
-              width="400"
-              height="300"
-              loading="lazy"
-              decoding="async"
-              data-aos="fade-up"
-              data-aos-delay="1000"
-            />
-          </picture>
-        </div>
+
+
       </div>
     </section>
 
-    <!-- Happy Clients Section -->
+    <!-- Testimonials Section -->
     <section class="testimonials" data-aos="fade-up" data-aos-delay="100">
       <h2 data-aos="fade-up" data-aos-delay="200">Happy Clients</h2>
       <div class="section-divider"></div>
@@ -334,130 +324,69 @@
         <div class="testimonial" data-aos="fade-up" data-aos-delay="300">
           <span class="quote">“</span>
           <p>
-            Boost your product and service's credibility by adding testimonials
-            from your clients. People love recommendations, so feedback from
-            others who've tried it is invaluable.
+            Blessing made my home-buying experience simple and stress-free. He
+            listened carefully to what I wanted and found properties that
+            matched my vision. His knowledge of the Calgary market was
+            impressive, and he made sure I got a great deal. I’m beyond happy
+            with my new home!
           </p>
-          <p class="author">— Natalia Lowe</p>
+          <p class="author">— Vincent K.</p>
         </div>
         <div class="testimonial" data-aos="fade-up" data-aos-delay="400">
           <span class="quote">“</span>
           <p>
-            Boost your product and service's credibility by adding testimonials
-            from your clients. People love recommendations so feedback from
-            others who've tried it is invaluable.
+            From our first conversation, I knew I was in good hands. Blessing
+            was proactive and always kept me updated with new listings. His
+            construction background gave me extra confidence, as he pointed out
+            important details most people would miss. The entire process felt
+            effortless. I highly recommend him!
           </p>
-          <p class="author">— Elliot Sterling</p>
+          <p class="author">— Bolaji O.</p>
         </div>
         <div class="testimonial" data-aos="fade-up" data-aos-delay="500">
           <span class="quote">“</span>
           <p>
-            Boost your product and service's credibility by adding testimonials
-            from your clients.
+            Blessing is simply amazing! He took the time to understand my needs
+            and worked tirelessly to find the perfect home. His negotiation
+            skills helped me save money, and he made the whole process smooth. I
+            wouldn’t trust anyone else!
           </p>
-          <p class="author">— Lillian Pratt</p>
+          <p class="author">— Ayodeji A.</p>
+        </div>
+        <div class="testimonial" data-aos="fade-up" data-aos-delay="600">
+          <span class="quote">“</span>
+          <p>
+            House hunting can be stressful, but not with Blessing. He was
+            patient, knowledgeable, and always available for my endless
+            questions. I never felt rushed or pressured. He truly wanted me to
+            find the right home, and I did. Couldn’t have asked for a better
+            experience!
+          </p>
+          <p class="author">— Amanuel T.</p>
+        </div>
+        <div class="testimonial" data-aos="fade-up" data-aos-delay="700">
+          <span class="quote">“</span>
+          <p>
+            Selling my home was a big decision, but Blessing made it easy. His
+            marketing strategy was spot-on, attracting buyers quickly. The
+            professional photos and videos made my listing stand out. He
+            communicated well and got me a fantastic deal. I’m very grateful!
+          </p>
+          <p class="author">— Adeshina A.</p>
+        </div>
+        <div class="testimonial" data-aos="fade-up" data-aos-delay="800">
+          <span class="quote">“</span>
+          <p>
+            Finding an investment property felt overwhelming at first, but
+            Blessing simplified everything. He understood what I needed and
+            found options that made financial sense. His real estate and
+            construction expertise were invaluable. I’ll definitely work with
+            him again!
+          </p>
+          <p class="author">— Eno-bong D.</p>
         </div>
       </div>
     </section>
-
-    <!-- Contact Section -->
-    <section id="contact" data-aos="fade-up" data-aos-delay="100">
-      <h2 data-aos="fade-up" data-aos-delay="200">Contact Us</h2>
-      <div class="section-divider"></div>
-      <div class="contact-form">
-        <form id="contactForm" name="contact" method="post" data-netlify="true">
-          <input
-            type="hidden"
-            name="_gotcha"
-            style="display: none !important"
-          />
-          <div class="form-group" data-aos="fade-up" data-aos-delay="300">
-            <input
-              type="text"
-              id="name"
-              name="name"
-              placeholder="Your Name"
-              required
-            />
-            <label for="name">Name</label>
-          </div>
-          <div class="form-group" data-aos="fade-up" data-aos-delay="400">
-            <input
-              type="email"
-              id="email"
-              name="email"
-              placeholder="Your Email"
-              required
-            />
-            <label for="email">Email</label>
-          </div>
-          <div class="form-group" data-aos="fade-up" data-aos-delay="500">
-            <textarea
-              id="message"
-              name="message"
-              placeholder="Your Message"
-              required
-            ></textarea>
-            <label for="message">Message</label>
-          </div>
-          <button
-            type="submit"
-            class="submit-btn"
-            data-aos="fade-up"
-            data-aos-delay="600"
-          >
-            Send Message
-          </button>
-        </form>
-        <div id="formResponse" class="form-response"></div>
-
-        <script>
-          document
-            .getElementById("contactForm")
-            .addEventListener("submit", async function (event) {
-              event.preventDefault();
-              const form = event.target;
-              const formResponse = document.getElementById("formResponse");
-              const formData = new FormData(form);
-
-              try {
-                const response = await fetch("/", {
-                  method: "POST",
-                  body: formData,
-                });
-
-                if (response.ok) {
-                  formResponse.innerHTML =
-                    '<p class="success">Message sent successfully!</p>';
-                  form.reset();
-                } else {
-                  formResponse.innerHTML =
-                    '<p class="error">Error sending message. Please try again.</p>';
-                }
-              } catch (error) {
-                formResponse.innerHTML =
-                  '<p class="error">Error sending message. Please try again.</p>';
-              }
-            });
-        </script>
-
-        <style>
-          .success {
-            color: green;
-          }
-          .error {
-            color: red;
-          }
-        </style>
-      </div>
-    </section>
-
-    <!-- Modal for Image Preview -->
-    <div id="imageModal" class="modal">
-      <span class="close">×</span>
-      <img class="modal-content" id="modalImage" />
-      <div id="caption"></div>
-    </div>
 
     <!-- Back to Top Button -->
     <button
@@ -479,10 +408,11 @@
     >
       <p>
         Ready to Build Your Dream Project?
-        <a href="#contact">Contact Us Now!</a>
+        <a href="about.html#contact">Contact Us Now!</a>
       </p>
     </div>
 
+    <!-- Footer -->
     <footer data-aos="fade-up" data-aos-delay="100">
       <p>© 2025 BLSD GROUP INC. Crafted with Passion.</p>
       <div class="footer-info">
@@ -495,34 +425,31 @@
             class="social-icon"
             data-aos="fade-up"
             data-aos-delay="200"
-          >
-            <i class="fab fa-facebook-f"></i>
-          </a>
+            ><i class="fab fa-facebook-f"></i
+          ></a>
           <a
             href="https://www.instagram.com/bless.olawuyi/"
             target="_blank"
             class="social-icon"
             data-aos="fade-up"
             data-aos-delay="300"
-          >
-            <i class="fab fa-instagram"></i>
-          </a>
+            ><i class="fab fa-instagram"></i
+          ></a>
           <a
             href="https://www.youtube.com/@blessolawuyi"
             target="_blank"
             class="social-icon"
             data-aos="fade-up"
             data-aos-delay="400"
-          >
-            <i class="fab fa-youtube"></i>
-          </a>
+            ><i class="fab fa-youtube"></i
+          ></a>
         </div>
       </div>
     </footer>
 
-    <script src="scripts.js"></script>
-    <!-- AOS JS -->
+    <!-- Scripts -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="scripts.js"></script>
     <script>
       AOS.init({
         duration: 800,
@@ -530,41 +457,6 @@
         offset: 100,
         easing: "ease-out-cubic",
       });
-    </script>
-    <script>
-      (function () {
-        function c() {
-          var b = a.contentDocument || a.contentWindow.document;
-          if (b) {
-            var d = b.createElement("script");
-            d.innerHTML =
-              "window.__CF$cv$params={r:'921988922fbbb03b',t:'MTc0MjE4MzUwMy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";
-            b.getElementsByTagName("head")[0].appendChild(d);
-          }
-        }
-        if (document.body) {
-          var a = document.createElement("iframe");
-          a.height = 1;
-          a.width = 1;
-          a.style.position = "absolute";
-          a.style.top = 0;
-          a.style.left = 0;
-          a.style.border = "none";
-          a.style.visibility = "hidden";
-          document.body.appendChild(a);
-          if ("loading" !== document.readyState) c();
-          else if (window.addEventListener)
-            document.addEventListener("DOMContentLoaded", c);
-          else {
-            var e = document.onreadystatechange || function () {};
-            document.onreadystatechange = function (b) {
-              e(b);
-              "loading" !== document.readyState &&
-                ((document.onreadystatechange = e), c());
-            };
-          }
-        }
-      })();
     </script>
   </body>
 </html>
