@@ -149,7 +149,19 @@ section {
     display: block;
   }
   .navbar {
-    background: rgba(26, 26, 26, 0.95);
+    background: rgba(26, 26, 26, 0.7);
+    padding: 0.15rem 0.5rem;
+  }
+  .logo {
+    font-size: 1rem; /* Optionally reduce the logo font size */
+  }
+  .logo-img {
+    width: 50px;
+    height: auto;
+  }
+  .nav-links a {
+    padding: 0.5rem; /* Adjust link padding for better spacing */
+    font-size: 0.9rem; /* Optionally reduce font size for links */
   }
   .nav-links {
     display: none;
@@ -198,10 +210,16 @@ header {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.3);
   z-index: -1;
 }
-
+@media (max-width: 768px) {
+  .parallax-bg {
+    background: url("images/painted-ladies-san-francisco-usa.jpg") center/cover
+      no-repeat;
+    background-position: 50% 50%; /* Adjust for mobile screens */
+  }
+}
 .header-content {
   display: flex;
   flex-direction: column;
@@ -212,7 +230,7 @@ header {
 }
 
 .header-content h1 {
-  font-size: clamp(1.5rem, 8vw, 2rem);
+  font-size: clamp(1.5rem, 4vw, 2rem);
   color: #ffd700;
   text-transform: uppercase;
   letter-spacing: 1.5px;
@@ -797,4 +815,44 @@ footer {
 
 .cta-overlay a:hover {
   text-decoration: underline;
+}
+@media (max-width: 1024px) {
+  .hamburger {
+    display: block; /* Show the hamburger menu */
+  }
+
+  .navbar {
+    background: rgba(26, 26, 26, 0.7);
+    padding: 0.15rem 0.5rem;
+  }
+
+  .logo {
+    font-size: 1rem; /* Optionally reduce the logo font size */
+  }
+
+  .logo-img {
+    width: 50px;
+    height: auto;
+  }
+
+  .nav-links {
+    display: none; /* Hide the navigation links */
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: rgba(26, 26, 26, 0.95);
+    flex-direction: column;
+    padding: 1rem;
+    text-align: center;
+  }
+
+  .nav-links.active {
+    display: flex; /* Show the navigation links when active */
+  }
+
+  .nav-links a {
+    padding: 0.5rem; /* Adjust link padding for better spacing */
+    font-size: 0.9rem; /* Optionally reduce font size for links */
+  }
 }
