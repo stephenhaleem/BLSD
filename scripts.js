@@ -205,22 +205,106 @@ if (contactForm) {
 }
 document.addEventListener("DOMContentLoaded", () => {
   const carousel = document.querySelector(".carousel");
+  const carouselItems = document.querySelectorAll(".carousel-item");
   const prevButton = document.querySelector(".carousel-arrow.prev");
   const nextButton = document.querySelector(".carousel-arrow.next");
+  const totalItems = carouselItems.length;
+  let currentIndex = 0;
+  let itemsPerView = 3; // Default for desktop
 
-  let scrollPosition = 0;
-  const itemWidth = carousel.querySelector(".carousel-item").clientWidth + 24; // Adjust for gap
+  // Function to update the number of items per view based on screen size
+  const updateItemsPerView = () => {
+    itemsPerView = window.innerWidth <= 768 ? 1 : 3; // 1 item on mobile, 3 on desktop
+    updateCarousel();
+  };
 
-  // Scroll to the next set of items
+  // Function to update the carousel position
+  const updateCarousel = () => {
+    const itemWidth = carouselItems[0].getBoundingClientRect().width;
+    const translateX = -(currentIndex * itemWidth);
+    carousel.style.transform = `translateX(${translateX}px)`;
+
+    // Update button states
+    prevButton.disabled = currentIndex === 0;
+    nextButton.disabled = currentIndex >= totalItems - itemsPerView;
+  };
+
+  // Next button click
   nextButton.addEventListener("click", () => {
-    const maxScroll = carousel.scrollWidth - carousel.clientWidth;
-    scrollPosition = Math.min(scrollPosition + itemWidth, maxScroll);
-    carousel.style.transform = `translateX(-${scrollPosition}px)`;
+    if (currentIndex < totalItems - itemsPerView) {
+      currentIndex++;
+      updateCarousel();
+    }
   });
 
-  // Scroll to the previous set of items
+  // Prev button click
   prevButton.addEventListener("click", () => {
-    scrollPosition = Math.max(scrollPosition - itemWidth, 0);
-    carousel.style.transform = `translateX(-${scrollPosition}px)`;
+    if (currentIndex > 0) {
+      currentIndex--;
+      updateCarousel();
+    }
+  });
+  // Add this after the event listeners
+  let autoplayInterval = setInterval(() => {
+    if (currentIndex < totalItems - itemsPerView) {
+      currentIndex++;
+    } else {
+      currentIndex = 0;
+    }
+    updateCarousel();
+  }, 5000); // Change every 5 seconds
+
+  // Pause autoplay on hover
+  carouselContainer.addEventListener("mouseenter", () =>
+    clearInterval(autoplayInterval)
+  );
+  carouselContainer.addEventListener("mouseleave", () => {
+    autoplayInterval = setInterval(() => {
+      if (currentIndex < totalItems - itemsPerView) {
+        currentIndex++;
+      } else {
+        currentIndex = 0;
+      }
+      updateCarousel();
+    }, 5000);
+  });
+
+  // Swipe support for mobile
+  let touchStartX = 0;
+  let touchEndX = 0;
+
+  carousel.addEventListener("touchstart", (e) => {
+    touchStartX = e.touches[0].clientX;
+  });
+
+  carousel.addEventListener("touchmove", (e) => {
+    touchEndX = e.touches[0].clientX;
+  });
+
+  carousel.addEventListener("touchend", () => {
+    const swipeDistance = touchEndX - touchStartX;
+    const swipeThreshold = 50; // Minimum distance to trigger a swipe
+
+    if (swipeDistance > swipeThreshold) {
+      // Swipe right (prev)
+      if (currentIndex > 0) {
+        currentIndex--;
+        updateCarousel();
+      }
+    } else if (swipeDistance < -swipeThreshold) {
+      // Swipe left (next)
+      if (currentIndex < totalItems - itemsPerView) {
+        currentIndex++;
+        updateCarousel();
+      }
+    }
+  });
+
+  // Initial setup
+  updateItemsPerView();
+
+  // Update on window resize
+  window.addEventListener("resize", () => {
+    updateItemsPerView();
   });
 });

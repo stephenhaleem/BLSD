@@ -89,12 +89,13 @@ section {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.5rem 1rem;
+  padding: 0.25rem 1rem;
   background: transparent;
   backdrop-filter: blur(5px);
   z-index: 1000;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
   transition: background 0.3s ease;
+  min-height: 60px;
 }
 
 .navbar.scrolled {
@@ -107,12 +108,22 @@ section {
   font-family: "Hubot Sans", sans-serif;
   text-transform: uppercase;
   letter-spacing: 1.5px;
+  display: flex;
+  align-items: center;
+}
+.logo img {
+  width: 80px; /* Keep the width as requested */
+  height: auto; /* Let the height scale proportionally */
+  max-height: 50px; /* Cap the height to prevent navbar from growing too tall */
+  object-fit: contain; /* Ensure the logo fits without distortion */
 }
 
 .nav-links {
   display: flex;
   list-style: none;
   gap: 1.5rem;
+  margin: 0; /* Remove any default margins */
+  padding: 0;
 }
 
 .nav-links li {
@@ -124,10 +135,11 @@ section {
   color: #ccc;
   text-decoration: none;
   font-size: 1rem;
-  padding: 0.5rem 1rem;
+  padding: 0.3rem 1rem;
   transition: color 0.3s ease, background-color 0.3s ease, transform 0.3s ease;
   position: relative;
   border-radius: 5px;
+  line-height: 1;
 }
 
 .nav-links a:hover {
@@ -142,6 +154,7 @@ section {
   font-size: 2rem;
   cursor: pointer;
   color: #ffd700;
+  line-height: 1;
 }
 
 @media (max-width: 768px) {
@@ -149,15 +162,15 @@ section {
     display: block;
   }
   .navbar {
-    background: rgba(26, 26, 26, 0.7);
-    padding: 0.15rem 0.5rem;
+    background: rgba(26, 26, 26, 0.95);
+    min-height: 50px; /* Even smaller height on mobile */
+    padding: 0.2rem 1rem;
   }
   .logo {
     font-size: 1rem; /* Optionally reduce the logo font size */
   }
   .logo-img {
-    width: 50px;
-    height: auto;
+    max-height: 40px;
   }
   .nav-links a {
     padding: 0.5rem; /* Adjust link padding for better spacing */
@@ -298,6 +311,8 @@ header {
 }
 
 .company-overview {
+  text-align: center;
+  justify-content: center;
   max-width: 800px;
   margin: 0 auto;
 }
@@ -310,6 +325,8 @@ header {
 }
 
 .company-overview p {
+  justify-content: center;
+  align-items: center;
   font-size: 1rem;
   color: #ccc;
   font-family: "Hubot Sans", sans-serif;
@@ -476,26 +493,28 @@ header {
 }
 .carousel-container {
   position: relative;
-  overflow: hidden;
-  width: 100%;
+  max-width: 1200px; /* Limit width on large screens */
+  margin: 0 auto; /* Center the carousel */
+  padding: 0 60px;
 }
-
+.carousel-wrapper {
+  overflow: hidden; /* Hide items outside the viewport */
+}
 .carousel {
   display: flex;
-  gap: 1.5rem;
-  padding: 1.5rem 0;
-  overflow-x: auto;
+
   scroll-behavior: smooth;
   transition: transform 0.5s ease;
-  will-change: transform;
 }
 
 .carousel-item {
-  flex: 0 0 calc(33.33% - 1rem); /* Adjust width as needed */
-  max-width: 400px;
-  background: #2c2c2c; /* Placeholder background */
-  position: relative;
-  overflow: hidden;
+  flex: 0 0 33.33%; /* Show 3 items on desktop */
+  padding: 0 0.5rem; /* Gap between items */
+  box-sizing: border-box;
+}
+.carousel-item img {
+  width: 100%;
+  height: auto;
   border-radius: 10px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
@@ -513,12 +532,34 @@ header {
   border-radius: 50%;
   transition: background 0.3s ease;
 }
+.carousel-arrow.prev {
+  left: 0px;
+}
 
-.carousel-item img {
-  width: 100%;
-  height: auto;
-  border-radius: 10px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+.carousel-arrow.next {
+  right: 0px;
+}
+
+.carousel-arrow:hover {
+  background: rgba(255, 215, 0, 0.7); /* Gold hover effect */
+}
+
+.carousel-arrow:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+@media (max-width: 768px) {
+  .carousel-item {
+    flex: 0 0 100%;
+  }
+  .carousel-arrow {
+    font-size: 1.5rem; /* Slightly smaller on mobile */
+    padding: 0.3rem 0.8rem;
+  }
+  .carousel-container {
+    padding: 0 40px; /* Adjust padding for smaller screens */
+  }
 }
 
 .carousel-item p {
