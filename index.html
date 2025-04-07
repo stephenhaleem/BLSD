@@ -15,8 +15,11 @@
       rel="icon"
       type="images/png"
       sizes="32x32"
-      href="assets/blsd logoo (1).png"
+      href="assets/favicon-32x32.png"
     />
+    <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
+
+    <meta name="apple-mobile-web-app-title" content="BLSD GROUP INC" />
     <meta name="author" content="BLSD Group Inc" />
     <title>BLSD GROUP INC</title>
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
@@ -30,9 +33,12 @@
     <style>
       @import url("https://fonts.googleapis.com/css2?family=Hubot+Sans:ital,wght@0,200..900;1,200..900&family=Rowdies:wght@300;400;700&display=swap");
     </style>
-    <meta name="theme-color" content="#2c2c2c" />
-    <meta name="msapplication-navbutton-color" content="#2c2c2c" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="#2c2c2c" />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Lato:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+    </style>
+    <meta name="theme-color" content="#000000" />
+    <meta name="msapplication-navbutton-color" content="#000000" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="#000000" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
     <link rel="stylesheet" href="styles.css" />
@@ -60,6 +66,7 @@
         <li><a href="#why-choose-us">Why Us</a></li>
         <li><a href="#services">Services</a></li>
         <li><a href="#calculator">Mortgage Wizard</a></li>
+        <li><a href="#featured-houses">Featured Houses</a></li>
         <li><a href="#gallery">Featured Properties</a></li>
         <li><a href="about.html">About & Contact</a></li>
       </ul>
@@ -89,6 +96,43 @@
         </a>
       </div>
     </header>
+    <!-- Calculator Section -->
+    <section
+      class="calculator"
+      id="calculator"
+      data-aos="fade-up"
+      data-aos-delay="100"
+    >
+      <h2 data-aos="fade-up" data-aos-delay="200" style="color: #ffd700">
+        Mortgage Wizard
+      </h2>
+      <p data-aos="fade-up" data-aos-delay="300">
+        Want to find out your mortgage costs? Check out our free Mortgage Wizard
+        below!
+      </p>
+      <div class="section-divider"></div>
+      <div class="calc-container">
+        <form id="mortgageForm">
+          <label for="loanAmount">Loan Amount (CAD)</label>
+          <input type="number" id="loanAmount" required />
+          <label for="interestRate">Interest Rate (%)</label>
+          <input type="number" id="interestRate" step="0.1" required />
+          <label for="loanTerm">Loan Term (Years)</label>
+          <input type="number" id="loanTerm" required />
+          <button type="submit">Cast the Spell</button>
+          <button type="reset" id="reset">Reset</button>
+        </form>
+        <div
+          id="result"
+          class="result-card"
+          style="display: none"
+          data-aos="fade-up"
+          data-aos-delay="100"
+        >
+          Monthly Payment: <span id="monthlyPayment">CAD $0</span>
+        </div>
+      </div>
+    </section>
 
     <!-- Why Choose Us Section -->
     <section
@@ -97,10 +141,25 @@
       data-aos="fade-up"
       data-aos-delay="100"
     >
-      <h2 data-aos="fade-up" data-aos-delay="200" style="color: #ffd700">
+      <div class="company-overview" data-aos="fade-up" data-aos-delay="600">
+        <h3>About BLSD Group Inc</h3>
+        <p>
+          BLSD Group Inc is a Calgary-based real estate and media company
+          dedicated to helping clients achieve their property goals.
+          Specializing in new constructions, presales, and investments, we
+          combine industry knowledge with innovative marketing to deliver
+          exceptional results.
+        </p>
+      </div>
+      <div class="section-divider"></div>
+      <h2
+        data-aos="fade-up"
+        data-aos-delay="200"
+        style="color: #ffd700; padding-bottom: 100px"
+      >
         Why Choose BLSD Group Inc?
       </h2>
-      <div class="section-divider"></div>
+
       <div class="why-choose-content">
         <div class="reason" data-aos="fade-up" data-aos-delay="300">
           <h3>Expertise You Can Trust</h3>
@@ -125,16 +184,6 @@
             competitive edge.
           </p>
         </div>
-      </div>
-      <div class="company-overview" data-aos="fade-up" data-aos-delay="600">
-        <h3>About BLSD Group Inc</h3>
-        <p>
-          BLSD Group Inc is a Calgary-based real estate and media company
-          dedicated to helping clients achieve their property goals.
-          Specializing in new constructions, presales, and investments, we
-          combine industry knowledge with innovative marketing to deliver
-          exceptional results.
-        </p>
       </div>
     </section>
 
@@ -180,174 +229,98 @@
         </div>
       </div>
     </section>
-
-    <!-- Calculator Section -->
+    <!-- Featured Houses Section -->
     <section
-      class="calculator"
-      id="calculator"
+      class="featured-houses"
+      id="featured-houses"
       data-aos="fade-up"
       data-aos-delay="100"
     >
-      <h2 data-aos="fade-up" data-aos-delay="200" style="color: #ffd700">
-        Mortgage Wizard
-      </h2>
-      <p data-aos="fade-up" data-aos-delay="300">
-        Want to find out your mortgage costs? Check out our free Mortgage Wizard
-        below!
-      </p>
+      <h2 data-aos="fade-up" data-aos-delay="200">Featured Houses</h2>
       <div class="section-divider"></div>
-      <div class="calc-container">
-        <form id="mortgageForm">
-          <label for="loanAmount">Loan Amount (CAD)</label>
-          <input type="number" id="loanAmount" required />
-          <label for="interestRate">Interest Rate (%)</label>
-          <input type="number" id="interestRate" step="0.1" required />
-          <label for="loanTerm">Loan Term (Years)</label>
-          <input type="number" id="loanTerm" required />
-          <button type="submit">Cast the Spell</button>
-          <button type="reset" id="reset">Reset</button>
-        </form>
-        <div
-          id="result"
-          class="result-card"
-          style="display: none"
-          data-aos="fade-up"
-          data-aos-delay="100"
-        >
-          Monthly Payment: <span id="monthlyPayment">CAD $0</span>
-        </div>
-      </div>
-    </section>
-
-    <!-- Gallery Section (Featured Properties) -->
-    <section
-      class="gallery"
-      id="gallery"
-      data-aos="fade-up"
-      data-aos-delay="100"
-    >
-      <h2 data-aos="fade-up" data-aos-delay="200">Masterpieces</h2>
-      <div class="section-divider"></div>
-      <div class="carousel-container">
+      <div class="house-carousel-container">
         <button class="carousel-arrow prev" aria-label="Previous Slide">
           ‹
         </button>
-        <div class="carousel-wrapper">
-          <div class="carousel">
-            <div class="carousel-item" data-aos="fade-up" data-aos-delay="300">
+        <div class="house-carousel-wrapper">
+          <div class="house-carousel">
+            <div
+              class="house-carousel-item"
+              data-aos="fade-up"
+              data-aos-delay="300"
+            >
               <picture>
-                <source srcset="images/IMG_8208.webp" type="image/webp" />
+                <source
+                  srcset="images/WhatsApp Image 2025-04-07 at 6.23.56 PM (1) (1).webp"
+                  type="image/webp"
+                />
                 <img
-                  src="images/IMG_8208.jpg"
-                  width="400"
-                  height="300"
+                  src="images/WhatsApp Image 2025-04-07 at 6.23.56 PM (1).jpeg"
+                  width="600"
+                  height="400"
                   loading="lazy"
                   decoding="async"
-                  alt="Property 1"
+                  alt="House 1"
                 />
               </picture>
             </div>
-            <div class="carousel-item" data-aos="fade-up" data-aos-delay="400">
+            <div
+              class="house-carousel-item"
+              data-aos="fade-up"
+              data-aos-delay="400"
+            >
               <picture>
-                <source srcset="images/IMG_8209.webp" type="image/webp" />
+                <source
+                  srcset="images/WhatsApp Image 2025-04-07 at 6.23.56 PM (1).webp"
+                  type="image/webp"
+                />
                 <img
-                  src="images/IMG_8209.jpg"
-                  width="400"
-                  height="300"
+                  src="images/WhatsApp Image 2025-04-07 at 6.23.56 PM.webp"
+                  width="600"
+                  height="400"
                   loading="lazy"
                   decoding="async"
-                  alt="Property 2"
+                  alt="House 2"
                 />
               </picture>
             </div>
-            <div class="carousel-item" data-aos="fade-up" data-aos-delay="500">
+            <div
+              class="house-carousel-item"
+              data-aos="fade-up"
+              data-aos-delay="500"
+            >
               <picture>
-                <source srcset="images/IMG_8210.webp" type="image/webp" />
+                <source
+                  srcset="images/WhatsApp Image 2025-04-07 at 6.23.56 PM (2).webp"
+                  type="image/webp"
+                />
                 <img
-                  src="images/IMG_8210.jpg"
-                  width="400"
-                  height="300"
+                  src="images/WhatsApp Image 2025-04-07 at 6.23.56 PM (2).jpeg"
+                  width="600"
+                  height="400"
                   loading="lazy"
                   decoding="async"
-                  alt="Property 3"
+                  alt="House 3"
                 />
               </picture>
             </div>
-            <div class="carousel-item" data-aos="fade-up" data-aos-delay="600">
+            <div
+              class="house-carousel-item"
+              data-aos="fade-up"
+              data-aos-delay="600"
+            >
               <picture>
-                <source srcset="images/IMG_8211.webp" type="image/webp" />
-                <img
-                  src="images/IMG_8211.jpg"
-                  width="400"
-                  height="300"
-                  loading="lazy"
-                  decoding="async"
-                  alt="Property 4"
+                <source
+                  srcset="images/WhatsApp Image 2025-04-07 at 6.23.56 PM (3).webp"
+                  type="image/webp"
                 />
-              </picture>
-            </div>
-            <div class="carousel-item" data-aos="fade-up" data-aos-delay="700">
-              <picture>
-                <source srcset="images/IMG_8212.webp" type="image/webp" />
                 <img
-                  src="images/IMG_8212.jpg"
-                  width="400"
-                  height="300"
+                  src="images/WhatsApp Image 2025-04-07 at 6.23.56 PM (3).jpeg"
+                  width="600"
+                  height="400"
                   loading="lazy"
                   decoding="async"
-                  alt="Property 5"
-                />
-              </picture>
-            </div>
-            <div class="carousel-item" data-aos="fade-up" data-aos-delay="800">
-              <picture>
-                <source srcset="images/IMG_8213.webp" type="image/webp" />
-                <img
-                  src="images/IMG_8213.jpg"
-                  width="400"
-                  height="300"
-                  loading="lazy"
-                  decoding="async"
-                  alt="Property 6"
-                />
-              </picture>
-            </div>
-            <div class="carousel-item" data-aos="fade-up" data-aos-delay="800">
-              <picture>
-                <source srcset="images/IMG_8215.webp" type="image/webp" />
-                <img
-                  src="images/IMG_8215.jpg"
-                  width="400"
-                  height="300"
-                  loading="lazy"
-                  decoding="async"
-                  alt="Property 7"
-                />
-              </picture>
-            </div>
-            <div class="carousel-item" data-aos="fade-up" data-aos-delay="800">
-              <picture>
-                <source srcset="images/IMG_8217.webp" type="image/webp" />
-                <img
-                  src="images/IMG_8217.jpg"
-                  width="400"
-                  height="300"
-                  loading="lazy"
-                  decoding="async"
-                  alt="Property 8"
-                />
-              </picture>
-            </div>
-            <div class="carousel-item" data-aos="fade-up" data-aos-delay="800">
-              <picture>
-                <source srcset="images/8214 .webp" type="image/webp" />
-                <img
-                  src="images/8214.jpg"
-                  width="400"
-                  height="300"
-                  loading="lazy"
-                  decoding="async"
-                  alt="Property 9"
+                  alt="House 4"
                 />
               </picture>
             </div>
@@ -428,7 +401,94 @@
         </div>
       </div>
     </section>
+    <!-- Gallery Section (Featured Properties) -->
+    <section
+      class="gallery"
+      id="gallery"
+      data-aos="fade-up"
+      data-aos-delay="100"
+    >
+      <h2 data-aos="fade-up" data-aos-delay="200">Interiors</h2>
+      <div class="section-divider"></div>
+      <div class="carousel-container">
+        <button class="carousel-arrow prev" aria-label="Previous Slide">
+          ‹
+        </button>
+        <div class="carousel-wrapper">
+          <div class="carousel">
+            <div class="carousel-item" data-aos="fade-up" data-aos-delay="300">
+              <picture>
+                <source srcset="images/IMG_8208.webp" type="image/webp" />
+                <img
+                  src="images/IMG_8208.jpg"
+                  width="400"
+                  height="300"
+                  loading="lazy"
+                  decoding="async"
+                  alt="Property 1"
+                />
+              </picture>
+            </div>
 
+            <div class="carousel-item" data-aos="fade-up" data-aos-delay="600">
+              <picture>
+                <source srcset="images/IMG_8211.webp" type="image/webp" />
+                <img
+                  src="images/IMG_8211.jpg"
+                  width="400"
+                  height="300"
+                  loading="lazy"
+                  decoding="async"
+                  alt="Property 4"
+                />
+              </picture>
+            </div>
+            <div class="carousel-item" data-aos="fade-up" data-aos-delay="700">
+              <picture>
+                <source srcset="images/IMG_8212.webp" type="image/webp" />
+                <img
+                  src="images/IMG_8212.jpg"
+                  width="400"
+                  height="300"
+                  loading="lazy"
+                  decoding="async"
+                  alt="Property 5"
+                />
+              </picture>
+            </div>
+
+            <div class="carousel-item" data-aos="fade-up" data-aos-delay="800">
+              <picture>
+                <source srcset="images/IMG_8215.webp" type="image/webp" />
+                <img
+                  src="images/IMG_8215.jpg"
+                  width="400"
+                  height="300"
+                  loading="lazy"
+                  decoding="async"
+                  alt="Property 7"
+                />
+              </picture>
+            </div>
+
+            <div class="carousel-item" data-aos="fade-up" data-aos-delay="800">
+              <picture>
+                <source srcset="images/8214 .webp" type="image/webp" />
+                <img
+                  src="images/8214.jpg"
+                  width="400"
+                  height="300"
+                  loading="lazy"
+                  decoding="async"
+                  alt="Property 9"
+                />
+              </picture>
+            </div>
+          </div>
+        </div>
+        <button class="carousel-arrow next" aria-label="Next Slide">›</button>
+      </div>
+    </section>
     <!-- Back to Top Button -->
     <button
       id="backToTop"

@@ -206,8 +206,13 @@ if (contactForm) {
 document.addEventListener("DOMContentLoaded", () => {
   const carousel = document.querySelector(".carousel");
   const carouselItems = document.querySelectorAll(".carousel-item");
-  const prevButton = document.querySelector(".carousel-arrow.prev");
-  const nextButton = document.querySelector(".carousel-arrow.next");
+  const prevButton = document.querySelector(
+    ".carousel-container .carousel-arrow.prev"
+  );
+  const nextButton = document.querySelector(
+    ".carousel-container .carousel-arrow.next"
+  );
+  const carouselContainer = document.querySelector(".carousel-container"); // Define the container
   const totalItems = carouselItems.length;
   let currentIndex = 0;
   let itemsPerView = 3; // Default for desktop
@@ -244,7 +249,8 @@ document.addEventListener("DOMContentLoaded", () => {
       updateCarousel();
     }
   });
-  // Add this after the event listeners
+
+  // Add autoplay functionality
   let autoplayInterval = setInterval(() => {
     if (currentIndex < totalItems - itemsPerView) {
       currentIndex++;
@@ -255,19 +261,21 @@ document.addEventListener("DOMContentLoaded", () => {
   }, 5000); // Change every 5 seconds
 
   // Pause autoplay on hover
-  carouselContainer.addEventListener("mouseenter", () =>
-    clearInterval(autoplayInterval)
-  );
-  carouselContainer.addEventListener("mouseleave", () => {
-    autoplayInterval = setInterval(() => {
-      if (currentIndex < totalItems - itemsPerView) {
-        currentIndex++;
-      } else {
-        currentIndex = 0;
-      }
-      updateCarousel();
-    }, 5000);
-  });
+  if (carouselContainer) {
+    carouselContainer.addEventListener("mouseenter", () =>
+      clearInterval(autoplayInterval)
+    );
+    carouselContainer.addEventListener("mouseleave", () => {
+      autoplayInterval = setInterval(() => {
+        if (currentIndex < totalItems - itemsPerView) {
+          currentIndex++;
+        } else {
+          currentIndex = 0;
+        }
+        updateCarousel();
+      }, 5000);
+    });
+  }
 
   // Swipe support for mobile
   let touchStartX = 0;
@@ -306,5 +314,106 @@ document.addEventListener("DOMContentLoaded", () => {
   // Update on window resize
   window.addEventListener("resize", () => {
     updateItemsPerView();
+  });
+});
+// House Carousel
+document.addEventListener("DOMContentLoaded", () => {
+  const houseCarousel = document.querySelector(".house-carousel");
+  const houseCarouselItems = document.querySelectorAll(".house-carousel-item");
+  const housePrevButton = document.querySelector(
+    ".house-carousel-container .carousel-arrow.prev"
+  );
+  const houseNextButton = document.querySelector(
+    ".house-carousel-container .carousel-arrow.next"
+  );
+  const houseTotalItems = houseCarouselItems.length;
+  let houseCurrentIndex = 0;
+  let houseItemsPerView = 2; // Default for desktop
+
+  // Function to update the number of items per view based on screen size
+  const updateHouseItemsPerView = () => {
+    houseItemsPerView = window.innerWidth <= 768 ? 1 : 2; // 1 item on mobile, 2 on desktop
+    updateHouseCarousel();
+  };
+
+  // Function to update the house carousel position
+  const updateHouseCarousel = () => {
+    const itemWidth = houseCarouselItems[0].getBoundingClientRect().width;
+    const translateX = -(houseCurrentIndex * itemWidth);
+    houseCarousel.style.transform = `translateX(${translateX}px)`;
+
+    // Update button states
+    housePrevButton.disabled = houseCurrentIndex === 0;
+    houseNextButton.disabled =
+      houseCurrentIndex >= houseTotalItems - houseItemsPerView;
+  };
+
+  // Next button click
+  houseNextButton.addEventListener("click", () => {
+    if (houseCurrentIndex < houseTotalItems - houseItemsPerView) {
+      houseCurrentIndex++;
+      updateHouseCarousel();
+    }
+  });
+
+  // Prev button click
+  housePrevButton.addEventListener("click", () => {
+    if (houseCurrentIndex > 0) {
+      houseCurrentIndex--;
+      updateHouseCarousel();
+    }
+  });
+
+  // Swipe support for mobile
+  let houseTouchStartX = 0;
+  let houseTouchEndX = 0;
+
+  houseCarousel.addEventListener("touchstart", (e) => {
+    houseTouchStartX = e.touches[0].clientX;
+  });
+
+  houseCarousel.addEventListener("touchmove", (e) => {
+    houseTouchEndX = e.touches[0].clientX;
+  });
+
+  houseCarousel.addEventListener("touchend", () => {
+    const swipeDistance = houseTouchEndX - houseTouchStartX;
+    const swipeThreshold = 50; // Minimum distance to trigger a swipe
+
+    if (swipeDistance > swipeThreshold) {
+      // Swipe right (prev)
+      if (houseCurrentIndex > 0) {
+        houseCurrentIndex--;
+        updateHouseCarousel();
+      }
+    } else if (swipeDistance < -swipeThreshold) {
+      // Swipe left (next)
+      if (houseCurrentIndex < houseTotalItems - houseItemsPerView) {
+        houseCurrentIndex++;
+        updateHouseCarousel();
+      }
+    }
+  });
+
+  // Initial setup
+  updateHouseItemsPerView();
+
+  // Update on window resize
+  window.addEventListener("resize", () => {
+    updateHouseItemsPerView();
+  });
+});
+document.addEventListener("DOMContentLoaded", () => {
+  const navbar = document.querySelector(".navbar");
+  const navLinks = document.querySelector(".nav-links");
+
+  window.addEventListener("scroll", () => {
+    if (window.scrollY > 50) {
+      navbar.classList.add("scrolled"); // Add the scrolled class to the navbar
+      navLinks.classList.add("scrolled"); // Add the scrolled class to the nav-links
+    } else {
+      navbar.classList.remove("scrolled"); // Remove the scrolled class from the navbar
+      navLinks.classList.remove("scrolled"); // Remove the scrolled class from the nav-links
+    }
   });
 });
